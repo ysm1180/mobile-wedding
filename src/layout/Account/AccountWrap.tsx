@@ -61,7 +61,7 @@ const AccountWrap = ({
 };
 
 const Wrapper = styled.div`
-  font-family: 'SUITE-Regular';
+  font-family: SuseongBatang, sans-serif;
   padding: 10px 0;
   border-bottom: 1px solid #dfdfdf;
   &:last-of-type {

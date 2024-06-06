@@ -7,6 +7,7 @@ const Host = () => {
   const { groom, bride } = data.greeting.host;
   return (
     <>
+      <HostDivider />
       <HostContainer>
         <HostInfo person={groom} />
         <HostInfo person={bride} />
@@ -23,10 +24,10 @@ const HostInfo = ({ person }: { person: BrideAndGroom }) => {
       {person.parents && (
         <>
           {person.parents.map((parent, index) => (
-            <React.Fragment key={index}>
-              {index > 0 && ' · '}
+            <ParentName key={index}>
+              {index > 0 && '·'}
               {parent.name}
-            </React.Fragment>
+            </ParentName>
           ))}
         </>
       )}
@@ -39,16 +40,29 @@ const HostInfo = ({ person }: { person: BrideAndGroom }) => {
   );
 };
 
+const HostDivider = styled.div`
+  padding: 0;
+  margin: 0;
+  height: 1px;
+  border-top: #4f4f4f solid 1px;
+  text-align: center;
+  width: 80%;
+`;
+
 const HighlightedName = styled.span`
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 17px;
   color: #4f4f4f;
-  margin-right: 5px;
+  margin: 5px;
 `;
 
 const HostContainer = styled.div`
   gap: 8px;
-  font-family: HSSanTokki20-Regular, serif;
+  font-family: RIDIBatang, sans-serif;
+`;
+
+const ParentName = styled.span`
+  font-size: 14px;
 `;
 
 const HostDetails = styled.div`
@@ -56,16 +70,16 @@ const HostDetails = styled.div`
   justify-content: center;
   white-space: nowrap;
   display: flex;
-  gap: 6px;
   text-align: center;
   align-items: center;
-  font-weight: 700;
+
+  color: #9d7e5f;
+  font-size: 12px;
 `;
 
 const RelationText = styled.div`
   font-style: normal;
   line-height: 26px;
-  width: 50px;
   display: flex;
   gap: 6px;
 `;

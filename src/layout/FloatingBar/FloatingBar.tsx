@@ -50,33 +50,38 @@ const FloatingBar = ({ isVisible }: { isVisible: boolean }) => {
   };
 
   return (
-    <Nav isVisible={isVisible}>
-      <Button onClick={handleCount}>
-        <Heart fill="#e88ca6" />
-        {/*{count || ''}*/}
-      </Button>
-      <Button onClick={handleCopy}>
-        <Share fill="#e88ca6" />
-        공유
-      </Button>
-      <Button onClick={handleScroll}>
-        <Upward fill="#e88ca6" />
-        위로
-      </Button>
-    </Nav>
+    <NavContainer isVisible={isVisible}>
+      <NavButtonWrapper>
+        <Button onClick={handleCount}>
+          <Heart fill="#ACC3E9" />
+          {/*{count || ''}*/}
+        </Button>
+        <Button onClick={handleCopy}>
+          <Share fill="#ACC3E9" />
+        </Button>
+        <Button onClick={handleScroll}>
+          <Upward fill="#ACC3E9" />
+        </Button>
+      </NavButtonWrapper>
+    </NavContainer>
   );
 };
 
 export default FloatingBar;
 
-const Nav = styled.nav<{ isVisible: boolean }>`
-  min-width: 280px;
+const NavContainer = styled.nav<{ isVisible: boolean }>`
   position: fixed;
-  bottom: 30px;
-  left: 0;
-  right: 0;
+  bottom: 20px;
+  right: 20px;
   align-items: center;
   justify-content: center;
   gap: 5px;
   display: ${(props) => (props.isVisible ? 'flex' : 'none')};
+`;
+
+const NavButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
 `;

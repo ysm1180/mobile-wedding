@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import data from 'data.json';
 import Host from '../Contact/Host.tsx';
-import RoundButton from '@/components/RoundButton.tsx';
 import { Caption, Paragraph } from '@/components/Text.tsx';
 
 const Invitation = () => {
@@ -9,15 +8,9 @@ const Invitation = () => {
   return (
     <InvitationWrapper>
       <Paragraph>{greeting.message}</Paragraph>
+
       <Host />
       <Caption textAlign={'center'}>{greeting.eventDetail}</Caption>
-      {/* TODO: 구글캘린더 추가하기 기능을 넣는다면 링크 수정 */}
-      <RoundButton
-        target="_blank"
-        href=""
-        rel="noreferrer">
-        구글 캘린더 추가하기
-      </RoundButton>
     </InvitationWrapper>
   );
 };
@@ -29,4 +22,9 @@ const InvitationWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
+
+  background-color: rgba(250, 249 , 243, 0.7);
+  color: #1f4913;
+
+  padding: 20px;
 `;

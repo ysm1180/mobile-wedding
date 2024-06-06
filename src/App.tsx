@@ -10,6 +10,16 @@ import Guestbook from '@/layout/Guestbook/Guestbook.tsx';
 import Invitation from '@/layout/Invitation/Invitation.tsx';
 import Location from '@/layout/Location/Location.tsx';
 import Main from '@/layout/Main/Main.tsx';
+import styled from '@emotion/styled';
+
+const TitleWrapper = styled.section`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: #222;
+  overflow: auto;
+  height: 100vh;
+`;
 
 function App() {
   const ncpClientId = import.meta.env.VITE_APP_NAVERMAPS_CLIENT_ID;
@@ -39,13 +49,10 @@ function App() {
   return (
     <NavermapsProvider ncpClientId={ncpClientId}>
       <Container>
-        <Wrapper>
+        <TitleWrapper>
           <Main />
-        </Wrapper>
-        <Wrapper>
-          <Heading1>모시는 글</Heading1>
-          <Invitation />
-        </Wrapper>
+        </TitleWrapper>
+        <Invitation />
         <Wrapper ref={galleryRef}>
           <Heading1>Gallery</Heading1>
           <GalleryWrap />

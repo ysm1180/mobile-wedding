@@ -5,8 +5,10 @@ import ExpandMore from '@/assets/icons/expand_more.svg?react';
 interface IAccordionProps {
   title: string;
   children: ReactNode;
+  color: string;
 }
-const Accordion = ({ title, children }: IAccordionProps) => {
+
+const Accordion = ({ title, color, children }: IAccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleAccordion = () => {
@@ -14,12 +16,12 @@ const Accordion = ({ title, children }: IAccordionProps) => {
   };
 
   return (
-    <AccordionWrapper>
-      <AccordionHeader isActive={isOpen} onClick={toggleAccordion}>
+    <AccordionWrapper color={color}>
+      <AccordionHeader color={color} isActive={isOpen} onClick={toggleAccordion} >
         <p>{title}</p>
 
         <span>
-          <ExpandMore fill="#e88ca6" />
+          <ExpandMore fill="white" />
         </span>
       </AccordionHeader>
 
@@ -30,20 +32,20 @@ const Accordion = ({ title, children }: IAccordionProps) => {
 
 export default Accordion;
 
-const AccordionWrapper = styled.div`
-  font-family: HSSanTokki20-Regular, serif;
-  border: 1px solid #e6ece1;
+const AccordionWrapper = styled.div<{color: string}>`
+  font-family: RIDIBatang, sans-serif;
+  border: ${(props) => `1px solid ${props.color}`};
   margin-bottom: 20px;
   border-radius: 8px;
   overflow: hidden;
   transition: all 0.3s ease;
 `;
 
-const AccordionHeader = styled.div<{ isActive: boolean }>`
+const AccordionHeader = styled.div<{ color:string; isActive: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #e6ece1;
+  background-color: ${(props) => `${props.color}`};
   padding: 0 15px;
   cursor: pointer;
   & > p {
