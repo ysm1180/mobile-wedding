@@ -23,7 +23,6 @@ jobs:
       - name: Generate .env ⚙️
         run: |
           echo "VITE_APP_NAVERMAPS_CLIENT_ID=\"${{ vars.NAVERMAPS_CLIENT_ID }}\"" >> .env
-          ...
       
       - name: Install app 📦
         run: yarn install
