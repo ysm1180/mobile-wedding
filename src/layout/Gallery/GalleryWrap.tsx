@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import PhotoGallery from './PhotoGallery.tsx';
+import { Heading1 } from '@/components/Text.tsx';
 
 const GalleryWrap = () => {
   const [isMoreView, setIsMoreView] = useState(false);
@@ -11,6 +12,10 @@ const GalleryWrap = () => {
 
   return (
     <ContentsWrap>
+      <br />
+      <br />
+      <Heading1>Gallery</Heading1>
+      <br />
       <ImageMoreWrap isMoreView={isMoreView}>
         {!isMoreView && <WhiteGradientOverlay />}
         <PhotoGallery />
@@ -23,7 +28,6 @@ const GalleryWrap = () => {
 export default GalleryWrap;
 
 const ContentsWrap = styled.div`
-  margin: 30px 0;
   box-sizing: border-box;
   overflow: hidden;
   display: flex;

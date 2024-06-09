@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import Copy from '@/assets/icons/copy.svg?react';
 import kakaopay from '@/assets/icons/kakaopay.png?url';
 import toss from '@/assets/icons/toss.png?url';
+import { Flip, toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface IAccountProps {
   name: string;
@@ -20,18 +22,27 @@ const AccountWrap = ({
   tossAccount,
 }: IAccountProps) => {
   const handleCopy = () => {
-    navigator.clipboard.writeText(account).then(
-      () => {
-        alert('계좌번호가 복사되었습니다.😉😉');
-      },
-      () => {
-        alert('계좌번호 복사에 실패했습니다.🥲🥲');
-      },
+    navigator.clipboard.writeText(account).then(() =>
+      toast.success(`${account} 계좌번호가 복사되었습니다.`, {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        pauseOnFocusLoss: false,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        transition: Flip,
+      }),
     );
   };
 
   return (
     <Wrapper>
+      <ToastWrapper>
+        <ToastContainer />
+      </ToastWrapper>
       <Info>
         <Relation>{relation}</Relation>
         <Name>{name}</Name>
@@ -60,6 +71,11 @@ const AccountWrap = ({
   );
 };
 
+const ToastWrapper = styled.div`
+  font-size: 14px;
+  font-family: SuseongBatang, sans-serif;
+`;
+
 const Wrapper = styled.div`
   font-family: SuseongBatang, sans-serif;
   padding: 10px 0;
@@ -78,12 +94,13 @@ const Info = styled.div`
   align-items: center;
   gap: 5px;
   margin: 5px 0;
+  color: #44484d;
 `;
 const Relation = styled.span`
   color: #44484d;
 `;
 const Name = styled.span`
-  font-size: 1rem
+  font-size: 1rem;
 `;
 
 const Details = styled.div`
@@ -92,7 +109,10 @@ const Details = styled.div`
   justify-content: space-between;
 `;
 
-const AccountInfo = styled.div``;
+const AccountInfo = styled.div`
+  color: black;
+`;
+
 const CopyButton = styled.button`
   border: none;
   border-radius: 5px;

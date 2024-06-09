@@ -37,8 +37,9 @@
   },
   "hostInfo": [
     {
-      "host": "신랑측 마음",
-      "color": "#ACC3E9",
+      "host": "신랑측",
+      "color": "#595d3b",
+      "backgroundColor": "#e6e7dc",
       "accountInfo": [
         {
           "name": "연성민",
@@ -63,8 +64,9 @@
       ]
     },
     {
-      "host": "신부측 마음",
-      "color": "#ECC3E9",
+      "host": "신부측",
+      "color": "#856442",
+      "backgroundColor": "#f0eae1",
       "accountInfo": [
         {
           "name": "김예지",

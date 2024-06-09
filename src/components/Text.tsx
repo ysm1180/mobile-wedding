@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const Heading1 = styled.p`
   font-family: RIDIBatang, sans-serif;
-  font-size: 1.5rem;
+  font-size: 18px;
   margin: 10px;
   color: #1f4913;
   white-space: pre-line;
@@ -25,7 +25,7 @@ export const PointTitle = styled.p`
 `;
 
 export const Paragraph = styled.p`
-  font-size: 16px;
+  font-size: 15px;
   line-height: 2rem;
   white-space: pre-line;
 `;

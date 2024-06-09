@@ -1,14 +1,16 @@
 import { ReactNode, useState } from 'react';
 import styled from '@emotion/styled';
 import ExpandMore from '@/assets/icons/expand_more.svg?react';
+import WeddingIcon from '@/assets/icons/wedding.png';
 
 interface IAccordionProps {
   title: string;
   children: ReactNode;
   color: string;
+  backgroundColor: string;
 }
 
-const Accordion = ({ title, color, children }: IAccordionProps) => {
+const Accordion = ({ title, color, backgroundColor, children }: IAccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleAccordion = () => {
@@ -17,14 +19,16 @@ const Accordion = ({ title, color, children }: IAccordionProps) => {
 
   return (
     <AccordionWrapper color={color}>
-      <AccordionHeader color={color} isActive={isOpen} onClick={toggleAccordion} >
-        <p>{title}</p>
-
+      <AccordionHeader
+        color={color}
+        backgroundColor={backgroundColor}
+        isActive={isOpen}
+        onClick={toggleAccordion}>
+        <AccordionTitle>{title}</AccordionTitle>
         <span>
-          <ExpandMore fill="white" />
+          <ExpandMore fill={color} />
         </span>
       </AccordionHeader>
-
       {isOpen && <AccordionContent>{children}</AccordionContent>}
     </AccordionWrapper>
   );
@@ -32,8 +36,8 @@ const Accordion = ({ title, color, children }: IAccordionProps) => {
 
 export default Accordion;
 
-const AccordionWrapper = styled.div<{color: string}>`
-  font-family: RIDIBatang, sans-serif;
+const AccordionWrapper = styled.div<{ color: string }>`
+  font-family: Pretendard-Regular, sans-serif;
   border: ${(props) => `1px solid ${props.color}`};
   margin-bottom: 20px;
   border-radius: 8px;
@@ -41,16 +45,19 @@ const AccordionWrapper = styled.div<{color: string}>`
   transition: all 0.3s ease;
 `;
 
-const AccordionHeader = styled.div<{ color:string; isActive: boolean }>`
+const AccordionHeader = styled.div<{ backgroundColor: string; color: string; isActive: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: ${(props) => `${props.color}`};
+  background-color: ${(props) => `${props.backgroundColor}`};
   padding: 0 15px;
+  font-size: 13px;
+  color: ${(props) => `${props.color}`};
+  background-image: url(${WeddingIcon});
+  background-repeat: no-repeat;
+  background-position: 5%;
+  background-size: 16px;
   cursor: pointer;
-  & > p {
-    color: #44484d;
-  }
   & > span {
     display: flex;
     align-items: center;
@@ -59,6 +66,10 @@ const AccordionHeader = styled.div<{ color:string; isActive: boolean }>`
     transition: all 0.3s ease;
     transform: ${(props) => (props.isActive ? 'rotate(180deg)' : undefined)};
   }
+`;
+
+const AccordionTitle = styled.p`
+  padding-left: 25px;
 `;
 
 const AccordionContent = styled.div`

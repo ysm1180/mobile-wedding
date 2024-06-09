@@ -11,6 +11,7 @@ import Invitation from '@/layout/Invitation/Invitation.tsx';
 import Location from '@/layout/Location/Location.tsx';
 import Main from '@/layout/Main/Main.tsx';
 import styled from '@emotion/styled';
+import Contact from './layout/Contact/Contact';
 
 const TitleWrapper = styled.section`
   display: flex;
@@ -24,7 +25,7 @@ const TitleWrapper = styled.section`
 function App() {
   const ncpClientId = import.meta.env.VITE_APP_NAVERMAPS_CLIENT_ID;
   const [isVisible, setIsVisible] = useState(false);
-  const galleryRef = useRef(null);
+  const ref = useRef(null);
 
   useEffect(() => {
     window.addEventListener('scroll', checkScrollPosition);
@@ -34,8 +35,8 @@ function App() {
   }, []);
 
   const checkScrollPosition = () => {
-    if (galleryRef.current) {
-      const { offsetTop } = galleryRef.current;
+    if (ref.current) {
+      const { offsetTop } = ref.current;
       const scrollPosition = window.scrollY;
 
       if (scrollPosition >= offsetTop) {
@@ -53,18 +54,12 @@ function App() {
           <Main />
         </TitleWrapper>
         <Invitation />
-        <Wrapper ref={galleryRef}>
-          <Heading1>Gallery</Heading1>
-          <GalleryWrap />
-        </Wrapper>
-        <Wrapper>
-          <Heading1>마음 전하실 곳</Heading1>
+        <GalleryWrap />
+        <Contact />
+        <Wrapper ref={ref}>
           <Account />
         </Wrapper>
-        <Wrapper>
-          <Heading1>오시는 길</Heading1>
-          <Location />
-        </Wrapper>
+        <Location />
         <Wrapper>
           <Heading1>신랑 신부에게</Heading1>
           <Guestbook />

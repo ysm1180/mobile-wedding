@@ -22,6 +22,11 @@ const Main = () => {
           저희 두 사람의 특별한 시작을
           <br />
           소중한 분들과 함께하고 싶습니다.
+          <br />
+          <br />
+          2024. 08. 31 오후 1시 10분
+          <br />
+          더시그니처클래스 웨딩홀
         </SubTitle>
       </MainWrapper>
     </MainBackground>
@@ -115,7 +120,7 @@ const MainWrapper = styled.div`
 
 const OurName = styled.div`
   font-family: RIDIBatang;
-  font-size: 17px;
+  font-size: 18px;
   line-height: 120%;
   white-space: pre-line;
   margin: 10px 0;

@@ -75,7 +75,7 @@ const NavContainer = styled.nav<{ isVisible: boolean }>`
   right: 20px;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 4px;
   display: ${(props) => (props.isVisible ? 'flex' : 'none')};
 `;
 
@@ -83,5 +83,5 @@ const NavButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  gap: 1rem;
+  gap: 8px;
 `;
