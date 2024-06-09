@@ -23,6 +23,7 @@ const PhotoGallery = () => {
             <Item
               key={index}
               cropped
+              
               original={image.source}
               thumbnail={image.source}
               width="1280"
