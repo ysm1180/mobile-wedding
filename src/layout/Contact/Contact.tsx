@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import data from 'data.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faSms } from '@fortawesome/free-solid-svg-icons';
 import { Heading1 } from '@/components/Text';
