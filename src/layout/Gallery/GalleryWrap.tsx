@@ -20,7 +20,10 @@ const GalleryWrap = () => {
         {!isMoreView && <WhiteGradientOverlay />}
         <PhotoGallery />
       </ImageMoreWrap>
-      {!isMoreView && <PlusButton onClick={onClickImageMoreViewButton}>더보기</PlusButton>}
+      {!isMoreView && <PlusButton onClick={onClickImageMoreViewButton}>사진 더보기</PlusButton>}
+      <br />
+      <br />
+      <br />
     </ContentsWrap>
   );
 };
@@ -40,7 +43,7 @@ const ImageMoreWrap = styled.div<{ isMoreView: boolean }>`
   max-height: ${(props) =>
     props.isMoreView
       ? ''
-      : '60vh'}; /* isMoreView 상태가 true일 때는 높이 제한 없이, false일 때는 195px로 작게 보이도록 */
+      : '30vh'}; /* isMoreView 상태가 true일 때는 높이 제한 없이, false일 때는 195px로 작게 보이도록 */
   overflow: hidden;
 `;
 
@@ -54,12 +57,10 @@ const WhiteGradientOverlay = styled.div`
 `;
 
 const PlusButton = styled.div`
-  width: 100%;
   box-sizing: border-box;
   padding: 6px 12px;
   font-size: 1rem;
   align-items: center;
-  border-radius: 4px;
-  border: 1px solid #dfdfdf;
+  color: #1f4a14;
   cursor: pointer;
 `;

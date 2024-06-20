@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import data from 'data.json';
 import { Caption, PointTitle } from '@/components/Text.tsx';
 import { ILocationInfo } from '@/types/data.ts';
+import Icon from '@/components/Icon';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 const Address = () => {
   const { locationInfo } = data;
@@ -10,10 +12,21 @@ const Address = () => {
       {locationInfo?.map((item: ILocationInfo) => {
         const { title, desc } = item;
         return (
-          <Way key={title}>
+          <>
             <PointTitle>{title}</PointTitle>
-            <Caption>{desc}</Caption>
-          </Way>
+            <Divider />
+            <Way>
+              {desc.map((text) => {
+                return (
+                  <Item>
+                    <ItemIcon icon={faCircle} size="xs" />
+                    <Caption>{text}</Caption>
+                  </Item>
+                );
+              })}
+            </Way>
+            <br />
+          </>
         );
       })}
     </WayWrapper>
@@ -27,11 +40,33 @@ const WayWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin: 20px 0px;
-  gap: 20px;
+  padding: 20px;
+  background-color: #f8f8f8;
 `;
 
 const Way = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
+  padding-left: 10px;
+  gap: 5px;
 `;
+
+const Divider = styled.div`
+  padding: 0;
+  margin: auto;
+  height: 1px;
+  border-top: #e0e0e0 solid 1px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 10px;
+`;
+
+const Item = styled.div`
+  display: flex;
+  gap: 8px;
+`
+
+const ItemIcon = styled(Icon)`
+  margin-top: 3px;
+`

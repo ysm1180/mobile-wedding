@@ -15,13 +15,13 @@ export const Heading2 = styled.p`
 `;
 
 export const PointTitle = styled.p`
-  font-family: RIDIBatang, sans-serif;
+  font-family: SF_HambakSnow, sans-serif;
+  font-weight: bold;
   line-height: 1;
   margin: 0;
   color: #333;
   white-space: pre-line;
   padding: 10px;
-  border-bottom: 1px solid black;
 `;
 
 export const Paragraph = styled.p`
@@ -31,7 +31,8 @@ export const Paragraph = styled.p`
 `;
 
 export const Caption = styled.p<{ textAlign?: string }>`
-  font-weight: 200;
+  margin: 0;
+  font-size: 13px;
   text-align: ${(props) => (props.textAlign ? props.textAlign : 'start')};
   white-space: pre-line;
 `;

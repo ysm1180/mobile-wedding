@@ -4,6 +4,7 @@ import { faPhone, faSms } from '@fortawesome/free-solid-svg-icons';
 import { Heading1 } from '@/components/Text';
 import Bride from '@/assets/icons/bride.png';
 import Groom from '@/assets/icons/groom.png';
+import Icon from '@/components/Icon';
 
 const Container = styled.div`
   background-color: #fefaf7;
@@ -54,8 +55,6 @@ const ContactButton = styled.a`
     background-color: #555;
   }
 `;
-
-const Icon = styled(FontAwesomeIcon)``;
 
 const ContactSection = styled.div`
   display: flex;

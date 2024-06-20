@@ -2,15 +2,20 @@ import styled from '@emotion/styled';
 import data from 'data.json';
 import mainImg from '@/assets/images/main.jpg';
 import connerIcon from '@/assets/icons/conner.png';
+import { useState } from 'react';
+import Icon from '@/components/Icon';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
 
 const Main = () => {
+  const [openInterview, setOpenInterview] = useState(false);
   const { greeting } = data;
+
   return (
     <MainBackground>
       <MainWrapper>
-        <InterviewContainer>
+        <InterviewContainer onClick={() => setOpenInterview(true)}>
           <InterviewText>
-            💕 두 사람의 이야기, <InterviewEmphasis>웨딩 인터뷰</InterviewEmphasis>를 확인해보세요!
+            💕 두 사람의 <InterviewEmphasis>웨딩 이야기</InterviewEmphasis>를 확인해보세요!
           </InterviewText>
         </InterviewContainer>
         <OurName>
@@ -29,6 +34,13 @@ const Main = () => {
           더시그니처클래스 웨딩홀
         </SubTitle>
       </MainWrapper>
+      {openInterview && (
+        <MainPopup>
+          <CloseButton onClick={() => setOpenInterview(false)}>
+            <Icon icon={faClose} size="2x" />
+          </CloseButton>
+        </MainPopup>
+      )}
     </MainBackground>
   );
 };
@@ -47,7 +59,8 @@ const InterviewContainer = styled.div`
   border-radius: 10px;
   text-align: center;
   cursor: pointer;
-  z-index: 20;
+  z-index: 10;
+  outline: none;
 
   &:after {
     content: '';
@@ -149,4 +162,23 @@ const SubTitle = styled.div`
   @media (min-width: 1024px) {
     font-size: 18px;
   }
+`;
+
+const MainPopup = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(250, 249, 243, 1);
+  z-index: 20;
+`;
+
+const CloseButton = styled.button`
+  position: fixed;
+  right: 13px;
+  top: 13px;
+  background-color: transparent;
+  border: none;
 `;

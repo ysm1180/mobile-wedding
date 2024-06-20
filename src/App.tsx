@@ -60,10 +60,7 @@ function App() {
           <Account />
         </Wrapper>
         <Location />
-        <Wrapper>
-          <Heading1>신랑 신부에게</Heading1>
           <Guestbook />
-        </Wrapper>
         <FloatingBar isVisible={isVisible} />
       </Container>
     </NavermapsProvider>

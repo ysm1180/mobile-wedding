@@ -11,23 +11,29 @@ const PhotoGallery = () => {
   };
 
   return (
-    <Gallery>
+    <Gallery
+      options={{
+        arrowNext: false,
+        arrowPrev: false,
+        zoom: false,
+        wheelToZoom: false,
+        maxZoomLevel: 1,
+      }}>
       <div
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 0fr)',
-          gridGap: 2,
+          gridGap: 4,
         }}>
         {images.map((image, index) => {
           return (
             <Item
               key={index}
               cropped
-              
               original={image.source}
               thumbnail={image.source}
-              width="1280"
-              height="1920">
+              width="537"
+              height="805">
               {({ ref, open }) => (
                 <img
                   style={smallItemStyles}
