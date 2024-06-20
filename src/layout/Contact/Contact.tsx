@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faSms } from '@fortawesome/free-solid-svg-icons';
 import { Heading1 } from '@/components/Text';
 import Bride from '@/assets/icons/bride.png';

@@ -3,7 +3,7 @@ import data from 'data.json';
 import Address from './Address.tsx';
 import Map from './Map.tsx';
 import MapButtons from './MapButtons.tsx';
-import { Caption, Heading1, PointTitle } from '@/components/Text.tsx';
+import { Caption, Heading1 } from '@/components/Text.tsx';
 import Icon from '@/components/Icon.tsx';
 import { faLocationDot, faBuilding, faCopy } from '@fortawesome/free-solid-svg-icons';
 
