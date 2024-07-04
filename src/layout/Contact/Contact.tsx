@@ -119,7 +119,7 @@ const Contact = () => {
       <Profiles>
         <Profile>
           <Name>신랑에게</Name>
-          <ContactButton href="tel:+8201095557391">
+          <ContactButton href="tel:01095557391">
             <Icon icon={faPhone} />
           </ContactButton>
           <ContactButton href="sms:+8201095557391">
@@ -128,7 +128,7 @@ const Contact = () => {
         </Profile>
         <Profile>
           <Name>신부에게</Name>
-          <ContactButton href="tel:+8201052106870">
+          <ContactButton href="tel:01052106870">
             <Icon icon={faPhone} />
           </ContactButton>
           <ContactButton href="sms:+8201052106870">
@@ -167,7 +167,7 @@ const Contact = () => {
             <ContactItem>
               <ContactRole>아버지</ContactRole>
               <ContactName>김정시</ContactName>
-              <ContactMiniButton href="sms:+8201062686870">
+              <ContactMiniButton href="tel:01062686870">
                 <Icon icon={faPhone} />
               </ContactMiniButton>
               <ContactMiniButton href="sms:+8201062686870">
@@ -177,7 +177,7 @@ const Contact = () => {
             <ContactItem>
               <ContactRole>어머니</ContactRole>
               <ContactName>전미애</ContactName>
-              <ContactMiniButton href="sms:+8201091706870">
+              <ContactMiniButton href="tel:01091706870">
                 <Icon icon={faPhone} />
               </ContactMiniButton>
               <ContactMiniButton href="sms:+8201091706870">
