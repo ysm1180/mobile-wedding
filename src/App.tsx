@@ -11,6 +11,7 @@ import Location from '@/layout/Location/Location.tsx';
 import Main from '@/layout/Main/Main.tsx';
 import styled from '@emotion/styled';
 import Contact from './layout/Contact/Contact';
+import Footer from './layout/Footer/Footer';
 
 const TitleWrapper = styled.section`
   display: flex;
@@ -59,7 +60,8 @@ function App() {
           <Account />
         </Wrapper>
         <Location />
-          <Guestbook />
+        <Guestbook />
+        <Footer />
         <FloatingBar isVisible={isVisible} />
       </Container>
     </NavermapsProvider>

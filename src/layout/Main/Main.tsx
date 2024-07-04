@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
+import { css, keyframes } from '@emotion/react';
 import data from 'data.json';
 import mainImg from '@/assets/images/main.jpg';
 import connerIcon from '@/assets/icons/conner.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Icon from '@/components/Icon';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,8 +11,29 @@ const Main = () => {
   const [openInterview, setOpenInterview] = useState(false);
   const { greeting } = data;
 
+  useEffect(() => {
+    const createLeaf = () => {
+      const leaf = document.createElement('div');
+      leaf.classList.add('leaf');
+      leaf.style.left = `${Math.random() * 100}%`;
+      leaf.style.animationDuration = `${Math.random() * 5 + 10}s`;
+      leaf.style.width = `${Math.random() * 5 + 10}px`;
+      leaf.style.height = leaf.style.width;
+      document.getElementById('leaf-container')?.appendChild(leaf);
+
+      setTimeout(() => {
+        leaf.remove();
+      }, 10000);
+    };
+
+    const interval = setInterval(createLeaf, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <MainBackground>
+      <LeafContainer id="leaf-container" />
       <MainWrapper>
         <InterviewContainer onClick={() => setOpenInterview(true)}>
           <InterviewText>
@@ -46,6 +68,37 @@ const Main = () => {
 };
 
 export default Main;
+
+const falling = keyframes`
+  0% {
+    transform: translateY(-5%) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+`;
+
+const LeafContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+`;
+
+const leafStyles = css`
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 C20 20 20 80 50 100 C80 80 80 20 50 0' fill='%2390EE90' /%3E%3C/svg%3E");
+  background-size: contain;
+  opacity: 0.7;
+  animation: ${falling} 10s infinite linear;
+`;
 
 const InterviewContainer = styled.div`
   position: absolute;
@@ -117,11 +170,25 @@ const MainBackground = styled.div`
   height: 100vh;
   background-size: cover;
   background-position: 50%;
-
+  position: relative;
   place-content: end;
 
   @media (min-width: 1024px) {
     background-position-y: 30%;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+  }
+
+  .leaf {
+    ${leafStyles}
   }
 `;
 

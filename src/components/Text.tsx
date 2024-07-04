@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
 
 export const Heading1 = styled.p`
-  font-family: RIDIBatang, sans-serif;
-  font-size: 18px;
+  font-family: GowunBatang-Bold, sans-serif;
+  font-size: 16px;
   margin: 10px;
   color: #1f4913;
   white-space: pre-line;
+  font-weight: 600;
 `;
 
 export const Heading2 = styled.p`
@@ -15,13 +16,14 @@ export const Heading2 = styled.p`
 `;
 
 export const PointTitle = styled.p`
-  font-family: SF_HambakSnow, sans-serif;
+  font-family: GowunBatang-Bold, sans-serif;
   font-weight: bold;
   line-height: 1;
   margin: 0;
   color: #333;
   white-space: pre-line;
   padding: 10px;
+  font-weight: 600;
 `;
 
 export const Paragraph = styled.p`
@@ -35,4 +37,9 @@ export const Caption = styled.p<{ textAlign?: string }>`
   font-size: 13px;
   text-align: ${(props) => (props.textAlign ? props.textAlign : 'start')};
   white-space: pre-line;
+`;
+
+export const ButtonCaption = styled.span`
+  font-family: 'RIDIBatang', sans-serif;
+  font-size: 12px;
 `;

@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import data from 'data.json';
 import Host from './Host.tsx';
 import { Paragraph } from '@/components/Text.tsx';
+import Calendar from './Calendar.tsx';
+import Countdown from './Countdown.tsx';
 
 const Invitation = () => {
   const { greeting } = data;
@@ -10,6 +12,8 @@ const Invitation = () => {
       <Paragraph>{greeting.message}</Paragraph>
       <Divider />
       <Host />
+      <Calendar weddingDate="2024-08-31" />
+      <Countdown weddingDate="2024-08-31T13:10:00+09:00" />
     </InvitationWrapper>
   );
 };

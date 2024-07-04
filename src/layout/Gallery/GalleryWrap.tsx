@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from '@emotion/styled';
 import PhotoGallery from './PhotoGallery.tsx';
 import { Heading1 } from '@/components/Text.tsx';
-
+import ExpandMore from '@/assets/icons/expand_more.svg?react';
 const GalleryWrap = () => {
   const [isMoreView, setIsMoreView] = useState(false);
 
@@ -12,18 +12,18 @@ const GalleryWrap = () => {
 
   return (
     <ContentsWrap>
-      <br />
-      <br />
       <Heading1>Gallery</Heading1>
       <br />
       <ImageMoreWrap isMoreView={isMoreView}>
         {!isMoreView && <WhiteGradientOverlay />}
         <PhotoGallery />
       </ImageMoreWrap>
-      {!isMoreView && <PlusButton onClick={onClickImageMoreViewButton}>사진 더보기</PlusButton>}
-      <br />
-      <br />
-      <br />
+      {!isMoreView && (
+        <PlusButton onClick={onClickImageMoreViewButton}>
+          사진 더보기
+          <ExpandMore fill={'black'} />
+        </PlusButton>
+      )}
     </ContentsWrap>
   );
 };
@@ -36,14 +36,14 @@ const ContentsWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  background-color: rgba(250, 250, 250, 0.7);
+  padding: 60px 0;
 `;
 
 const ImageMoreWrap = styled.div<{ isMoreView: boolean }>`
   position: relative;
-  max-height: ${(props) =>
-    props.isMoreView
-      ? ''
-      : '30vh'}; /* isMoreView 상태가 true일 때는 높이 제한 없이, false일 때는 195px로 작게 보이도록 */
+  max-height: ${(props) => (props.isMoreView ? '' : '30vh')};
   overflow: hidden;
 `;
 
@@ -53,7 +53,7 @@ const WhiteGradientOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 90%);
+  background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgb(250, 250, 250) 70%);
 `;
 
 const PlusButton = styled.div`
@@ -63,4 +63,7 @@ const PlusButton = styled.div`
   align-items: center;
   color: #1f4a14;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 `;

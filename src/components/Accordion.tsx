@@ -37,7 +37,7 @@ const Accordion = ({ title, color, backgroundColor, children }: IAccordionProps)
 export default Accordion;
 
 const AccordionWrapper = styled.div<{ color: string }>`
-  font-family: Pretendard-Regular, sans-serif;
+  font-family: GowunBatang-Regular, sans-serif;
   border: ${(props) => `1px solid ${props.color}`};
   margin-bottom: 20px;
   border-radius: 8px;
@@ -55,7 +55,7 @@ const AccordionHeader = styled.div<{ backgroundColor: string; color: string; isA
   color: ${(props) => `${props.color}`};
   background-image: url(${WeddingIcon});
   background-repeat: no-repeat;
-  background-position: 5%;
+  background-position: 16px;
   background-size: 16px;
   cursor: pointer;
   & > span {
@@ -70,6 +70,8 @@ const AccordionHeader = styled.div<{ backgroundColor: string; color: string; isA
 
 const AccordionTitle = styled.p`
   padding-left: 25px;
+  font-weight: bold;
+  font-family: RIDIBatang, sans-serif;
 `;
 
 const AccordionContent = styled.div`

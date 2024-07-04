@@ -51,7 +51,7 @@ export default Account;
 const AccountInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 50px 20px;
+  padding: 60px 20px;
 
   background-color: rgba(250, 249, 243, 0.7);
   color: #1f4913;
@@ -62,4 +62,6 @@ const AccountInfoDetails = styled.div`
   line-height: 1.8;
   margin-bottom: 40px;
   color: #222;
+
+  font-family: GowunBatang-Regular, sans-serif;
 `;

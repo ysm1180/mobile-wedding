@@ -41,7 +41,7 @@ const WayWrapper = styled.div`
   align-items: flex-start;
   margin: 20px 0px;
   padding: 20px;
-  background-color: #f8f8f8;
+  background-color: rgba(250, 250, 250, 0.7);
 `;
 
 const Way = styled.div`

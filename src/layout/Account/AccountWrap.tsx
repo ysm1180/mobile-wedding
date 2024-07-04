@@ -40,16 +40,14 @@ const AccountWrap = ({
 
   return (
     <Wrapper>
-      <ToastWrapper>
-        <ToastContainer />
-      </ToastWrapper>
+      <ToastContainer />
       <Info>
         <Relation>{relation}</Relation>
         <Name>{name}</Name>
       </Info>
       <Details>
         <AccountInfo>
-          {bank} {account}
+          {bank} | {account}
         </AccountInfo>
         <CopyButton onClick={handleCopy}>
           <Copy fill="#dfdfdf" />
@@ -71,13 +69,8 @@ const AccountWrap = ({
   );
 };
 
-const ToastWrapper = styled.div`
-  font-size: 14px;
-  font-family: SuseongBatang, sans-serif;
-`;
-
 const Wrapper = styled.div`
-  font-family: SuseongBatang, sans-serif;
+  font-family: GowunBatang-Regular, sans-serif;
   padding: 10px 0;
   border-bottom: 1px solid #dfdfdf;
   &:last-of-type {
@@ -96,11 +89,17 @@ const Info = styled.div`
   margin: 5px 0;
   color: #44484d;
 `;
+
 const Relation = styled.span`
+  font-family: GowunBatang-Bold, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
   color: #44484d;
 `;
+
 const Name = styled.span`
-  font-size: 1rem;
+  font-family: GowunBatang-Regular, sans-serif;
+  font-size: 14px;
 `;
 
 const Details = styled.div`

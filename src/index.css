@@ -30,13 +30,6 @@ body {
 }
 
 @font-face {
-  font-family: 'SuseongBatang';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/SuseongBatang.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
   font-family: 'GowunBatang-Regular';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
   font-weight: normal;
@@ -44,9 +37,9 @@ body {
 }
 
 @font-face {
-  font-family: 'Pretendard-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-  font-weight: 400;
+  font-family: 'GowunBatang-Bold';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Bold.woff') format('woff');
+  font-weight: 600;
   font-style: normal;
 }
 

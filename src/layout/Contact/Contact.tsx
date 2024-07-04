@@ -1,22 +1,20 @@
 import styled from '@emotion/styled';
 import { faPhone, faSms } from '@fortawesome/free-solid-svg-icons';
 import { Heading1 } from '@/components/Text';
-import Bride from '@/assets/icons/bride.png';
-import Groom from '@/assets/icons/groom.png';
 import Icon from '@/components/Icon';
 
 const Container = styled.div`
   background-color: #fefaf7;
   margin: 0;
-  padding: 0;
+  padding: 60px 0;
 `;
 
 const Profiles = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin: 30px 0;
+  margin: 50px 0 10px 0;
 `;
 
 const Profile = styled.div`
@@ -25,15 +23,8 @@ const Profile = styled.div`
   gap: 10px;
 `;
 
-const Image = styled.img`
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-`;
-
 const Name = styled.div`
-  font-family: Pretendard-Regular, sans-serif;
+  font-family: RIDIBatang, sans-serif;
   font-size: 14px;
   color: #333;
   margin: 10px;
@@ -46,8 +37,8 @@ const ContactButton = styled.a`
   background-color: #444;
   color: #fff;
   text-decoration: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 10px;
+  border-radius: 50%;
   transition: background-color 0.3s ease;
 
   &:hover {
@@ -58,15 +49,9 @@ const ContactButton = styled.a`
 const ContactSection = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 20px 10px;
+  padding: 10px;
 `;
 
-const ContactSectionTitle = styled.div`
-  color: #333;
-  font-size: 15px;
-  background-color: #f8f8f8;
-  padding: 20px;
-`;
 
 const ContactGroup = styled.div`
   flex: 1;
@@ -74,12 +59,13 @@ const ContactGroup = styled.div`
 `;
 
 const ContactGroupDescription = styled.span`
-  font-size: 10px;
+  font-size: 11px;
+  font-family: GowunBatang-Regular, sans-serif;
 `;
 
 const GroupTitle = styled.h3`
   margin-bottom: 20px;
-  font-size: 16px;
+  font-size: 15px;
   color: #444;
 `;
 
@@ -129,32 +115,27 @@ const ContactMiniButton = styled.a`
 const Contact = () => {
   return (
     <Container>
-      <br />
-      <br />
       <Heading1>축하의 마음 전하기</Heading1>
       <Profiles>
         <Profile>
-          <Image src={Groom} alt="Groom" />
           <Name>신랑에게</Name>
-          <ContactButton href="tel:+1234567890">
+          <ContactButton href="tel:+8201095557391">
             <Icon icon={faPhone} />
           </ContactButton>
-          <ContactButton href="sms:+0987654321">
+          <ContactButton href="sms:+8201095557391">
             <Icon icon={faSms} />
           </ContactButton>
         </Profile>
         <Profile>
-          <Image src={Bride} alt="Bride" />
           <Name>신부에게</Name>
-          <ContactButton href="tel:+0987654321">
+          <ContactButton href="tel:+8201052106870">
             <Icon icon={faPhone} />
           </ContactButton>
-          <ContactButton href="sms:+0987654321">
+          <ContactButton href="sms:+8201052106870">
             <Icon icon={faSms} />
           </ContactButton>
         </Profile>
       </Profiles>
-      <ContactSectionTitle>혼주에게 연락하기</ContactSectionTitle>
       <ContactSection>
         <ContactGroup>
           <GroupTitle>신랑 측 혼주</GroupTitle>
@@ -162,14 +143,14 @@ const Contact = () => {
             <ContactItem>
               <ContactRole>아버지</ContactRole>
               <ContactName>연복남</ContactName>
-              <ContactMiniButton href="sms:+0987654321">
+              <ContactMiniButton href="sms:+8201052357391">
                 <Icon icon={faSms} />
               </ContactMiniButton>
             </ContactItem>
             <ContactItem>
               <ContactRole>어머니</ContactRole>
               <ContactName>권혁선</ContactName>
-              <ContactMiniButton href="sms:+0987654321">
+              <ContactMiniButton href="sms:+8201036227393">
                 <Icon icon={faSms} />
               </ContactMiniButton>
             </ContactItem>
@@ -186,28 +167,26 @@ const Contact = () => {
             <ContactItem>
               <ContactRole>아버지</ContactRole>
               <ContactName>김정시</ContactName>
-              <ContactMiniButton href="sms:+0987654321">
+              <ContactMiniButton href="sms:+8201062686870">
                 <Icon icon={faPhone} />
               </ContactMiniButton>
-              <ContactMiniButton href="sms:+0987654321">
+              <ContactMiniButton href="sms:+8201062686870">
                 <Icon icon={faSms} />
               </ContactMiniButton>
             </ContactItem>
             <ContactItem>
               <ContactRole>어머니</ContactRole>
               <ContactName>전미애</ContactName>
-              <ContactMiniButton href="sms:+0987654321">
+              <ContactMiniButton href="sms:+8201091706870">
                 <Icon icon={faPhone} />
               </ContactMiniButton>
-              <ContactMiniButton href="sms:+0987654321">
+              <ContactMiniButton href="sms:+8201091706870">
                 <Icon icon={faSms} />
               </ContactMiniButton>
             </ContactItem>
           </ContactInfo>
         </ContactGroup>
       </ContactSection>
-      <br />
-      <br />
     </Container>
   );
 };
