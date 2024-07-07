@@ -14,29 +14,24 @@ const Footer = () => {
   const handleShare = () => {
     Kakao.Share.sendDefault({
       objectType: 'location',
-      address: '경기 성남시 분당구 판교역로 166 3층',
-      addressTitle: '카카오 판교오피스 카페톡',
+      address: '경기 수원시 권선구 호매실로 46-16 2층',
+      addressTitle: '더시그니처클래스',
       content: {
-        title: '신메뉴 출시♥︎ 체리블라썸라떼',
-        description: '이번 주는 체리블라썸라떼 1+1',
+        title: '성민 🩷 예지, 결혼합니다!',
+        description: '2024년 8월 31일 토요일 오후 1시 10분, 더시그니처클래스 2층',
         imageUrl:
-          'http://k.kakaocdn.net/dn/bSbH9w/btqgegaEDfW/vD9KKV0hEintg6bZT4v4WK/kakaolink40_original.png',
+          'https://ysm1180.github.io/wedding/thumbnail.jpg',
         link: {
           mobileWebUrl: 'https://ysm1180.github.io/wedding/',
           webUrl: 'https://ysm1180.github.io/wedding/',
         },
       },
-      social: {
-        likeCount: 286,
-        commentCount: 45,
-        sharedCount: 845,
-      },
       buttons: [
         {
-          title: '웹으로 보기',
+          title: '청첩장 보기',
           link: {
-            mobileWebUrl: 'https://developers.kakao.com',
-            webUrl: 'https://developers.kakao.com',
+            mobileWebUrl: 'https://ysm1180.github.io/wedding/',
+            webUrl: 'https://ysm1180.github.io/wedding/',
           },
         },
       ],
