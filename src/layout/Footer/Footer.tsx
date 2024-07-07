@@ -1,18 +1,64 @@
+import KakaoTalkIcon from '@/assets/icons/kakao-talk-black.png';
+import Icon from '@/components/Icon';
 import styled from '@emotion/styled';
+import { faLink } from '@fortawesome/free-solid-svg-icons';
+import { Flip, toast } from 'react-toastify';
+
+declare namespace Kakao {
+  namespace Share {
+    export function sendDefault(data: {}): void;
+  }
+}
 
 const Footer = () => {
   const handleShare = () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: '성민 ♥ 예지의 결혼식에 초대합니다',
-          text: '저희 두 사람의 소중한 시작을 함께해 주세요.',
-          url: window.location.href,
-        })
-        .catch((error) => console.log('공유 실패:', error));
-    } else {
-      alert('공유 기능을 지원하지 않는 브라우저입니다.');
-    }
+    Kakao.Share.sendDefault({
+      objectType: 'location',
+      address: '경기 성남시 분당구 판교역로 166 3층',
+      addressTitle: '카카오 판교오피스 카페톡',
+      content: {
+        title: '신메뉴 출시♥︎ 체리블라썸라떼',
+        description: '이번 주는 체리블라썸라떼 1+1',
+        imageUrl:
+          'http://k.kakaocdn.net/dn/bSbH9w/btqgegaEDfW/vD9KKV0hEintg6bZT4v4WK/kakaolink40_original.png',
+        link: {
+          mobileWebUrl: 'https://ysm1180.github.io/wedding/',
+          webUrl: 'https://ysm1180.github.io/wedding/',
+        },
+      },
+      social: {
+        likeCount: 286,
+        commentCount: 45,
+        sharedCount: 845,
+      },
+      buttons: [
+        {
+          title: '웹으로 보기',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+            webUrl: 'https://developers.kakao.com',
+          },
+        },
+      ],
+    });
+  };
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText('https://ysm1180.github.io/wedding').then(() => {
+      toast.dismiss();
+      toast.success('링크가 복사되었습니다.', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        pauseOnFocusLoss: false,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        transition: Flip,
+      });
+    });
   };
 
   return (
@@ -24,13 +70,26 @@ const Footer = () => {
           늘 곁에서 아껴주신 모든 분께 감사합니다.
           <br />
           <br />
-          저희의 감사한 마음 평생 잊지 않고
+          응원과 축하의 마음을 전해주신 모든 분들께도
+          <br />
+          진심으로 감사드립니다.
+          <br />
+          <br />
+          감사한 마음 평생 잊지 않고
           <br />
           예쁘게 잘 살겠습니다.
         </ThanksMessage>
       </ThanksContainer>
-      <ShareButton onClick={handleShare}>청첩장 공유하기</ShareButton>
-      <br />
+      <ShareContainer>
+        <ShareButton onClick={handleShare}>
+          <img src={KakaoTalkIcon} width={25} />
+          카카오톡 공유
+        </ShareButton>
+        <ShareButton onClick={handleCopy}>
+          <Icon icon={faLink} />
+          링크 복사
+        </ShareButton>
+      </ShareContainer>
       <Copyright>© 2024 성민 & 예지. All rights reserved.</Copyright>
     </FooterWrapper>
   );
@@ -45,38 +104,38 @@ const FooterWrapper = styled.footer`
 
 const ThanksContainer = styled.div`
   padding: 20px 20px;
-  margin-bottom: 30px;
   position: relative;
 `;
 
 const ThanksMessage = styled.p`
-  font-size: 14px;
+  font-family: GowunBatang-Regular, sans-serif;
+  font-size: 13px;
   color: #1f4913;
   line-height: 1.8;
   margin-bottom: 20px;
 `;
 
+const ShareContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30px;
+`;
+
 const ShareButton = styled.button`
-  background-color: #1f4913;
-  color: white;
+  font-family: RIDIBatang, sans-serif;
+  background-color: #e6e7dc;
+  color: #333;
   border: none;
   padding: 12px 20px;
-  border-radius: 25px;
   font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
   cursor: pointer;
   transition: background-color 0.3s;
+  width: 100%;
 
-  &:hover {
-    background-color: #2c6b1a;
-  }
-
-  svg {
-    margin-right: 8px;
-  }
+  gap: 6px;
 `;
 
 const Copyright = styled.p`

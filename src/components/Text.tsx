@@ -9,21 +9,21 @@ export const Heading1 = styled.p`
   font-weight: 600;
 `;
 
-export const Heading2 = styled.p`
-  font-size: 1rem;
-  margin: 10px;
-  white-space: pre-line;
-`;
 
 export const PointTitle = styled.p`
   font-family: GowunBatang-Bold, sans-serif;
-  font-weight: bold;
+  font-weight: 600;
   line-height: 1;
   margin: 0;
   color: #333;
   white-space: pre-line;
   padding: 10px;
   font-weight: 600;
+
+  display: flex;
+  flex-direction: row;
+
+  gap: 6px;
 `;
 
 export const Paragraph = styled.p`
@@ -33,10 +33,15 @@ export const Paragraph = styled.p`
 `;
 
 export const Caption = styled.p<{ textAlign?: string }>`
+  font-family: Pretendard-Regular, sans-serif;
   margin: 0;
-  font-size: 13px;
+  font-size: 14px;
   text-align: ${(props) => (props.textAlign ? props.textAlign : 'start')};
   white-space: pre-line;
+
+  b {
+    font-family: Pretendard-Bold, sans-serif;
+  }
 `;
 
 export const ButtonCaption = styled.span`

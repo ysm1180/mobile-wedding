@@ -1,27 +1,12 @@
-// import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import data from 'data.json';
-// import { increment, onValue, ref, update } from 'firebase/database';
-// import { realtimeDb } from 'firebase.ts';
 import JSConfetti from 'js-confetti';
-import Heart from '@/assets/icons/heart_plus.svg?react';
 import Share from '@/assets/icons/share.svg?react';
-import Upward from '@/assets/icons/upward.svg?react';
-import Button from '@/components/Button.tsx';
+import Icon from '@/components/Icon';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const FloatingBar = ({ isVisible }: { isVisible: boolean }) => {
   const { emojis } = data;
-
-  // TODO: count 기능 사용 원할시 firebase realtime db 연결!
-  // const [count, setCount] = useState(0);
-
-  // useEffect(() => {
-  // TODO: realtime db 에 likes 객체 추가.
-  //   const dbRef = ref(realtimeDb, 'likes');
-  //   onValue(dbRef, (snapshot) => {
-  //     setCount(Number(snapshot.val()));
-  //   });
-  // }, []);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(window.location.href).then(
@@ -36,31 +21,19 @@ const FloatingBar = ({ isVisible }: { isVisible: boolean }) => {
 
   const handleCount = () => {
     void jsConfetti.addConfetti({ emojis });
-
-    // 버튼 클릭시 likes 수 증가
-    // const dbRef = ref(realtimeDb);
-    // void update(dbRef, {
-    //   likes: increment(1),
-    // });
   };
 
   const jsConfetti = new JSConfetti();
-  const handleScroll = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   return (
     <NavContainer isVisible={isVisible}>
       <NavButtonWrapper>
         <Button onClick={handleCount}>
-          <Heart fill="#ACC3E9" />
+          <Icon icon={faHeart} color="#c34070" />
           {/*{count || ''}*/}
         </Button>
         <Button onClick={handleCopy}>
           <Share fill="#ACC3E9" />
-        </Button>
-        <Button onClick={handleScroll}>
-          <Upward fill="#ACC3E9" />
         </Button>
       </NavButtonWrapper>
     </NavContainer>
@@ -85,3 +58,15 @@ const NavButtonWrapper = styled.div`
 
   gap: 8px;
 `;
+
+const Button = styled.button`
+  padding: 6px;
+  border-radius: 50%;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+`.withComponent('a');

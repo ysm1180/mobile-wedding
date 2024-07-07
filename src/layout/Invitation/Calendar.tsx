@@ -84,7 +84,7 @@ const Day = styled.div<{ isWeddingDay: boolean }>`
   ${(props) =>
     props.isWeddingDay &&
     `
-     background-color: #595d3b;
+     background-color: #7ea387;
     border-radius: 50%;
     color: rgba(250, 249, 243, 1);
   `}

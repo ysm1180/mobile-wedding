@@ -1,19 +1,19 @@
+import Icon from '@/components/Icon.tsx';
+import { ButtonCaption, Caption, Heading1 } from '@/components/Text.tsx';
 import styled from '@emotion/styled';
+import { faBuilding, faCopy, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import data from 'data.json';
+import { Flip, toast } from 'react-toastify';
 import Address from './Address.tsx';
 import Map from './Map.tsx';
 import MapButtons from './MapButtons.tsx';
-import { ButtonCaption, Caption, Heading1 } from '@/components/Text.tsx';
-import Icon from '@/components/Icon.tsx';
-import { faLocationDot, faBuilding, faCopy } from '@fortawesome/free-solid-svg-icons';
-import { Flip, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const Location = () => {
   const { mapInfo } = data;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(mapInfo.address).then(() => {
+      toast.dismiss();
       toast.success('주소가 복사되었습니다.', {
         position: 'top-right',
         autoClose: 2000,
@@ -23,7 +23,7 @@ const Location = () => {
         pauseOnFocusLoss: false,
         draggable: true,
         progress: undefined,
-        theme: 'colored',
+        theme: 'light',
         transition: Flip,
       });
     });
@@ -31,8 +31,6 @@ const Location = () => {
 
   return (
     <LocationWrapper>
-      <br />
-      <br />
       <Heading1>오시는 길 안내</Heading1>
       <br />
       <Map />
@@ -42,7 +40,7 @@ const Location = () => {
         <AddressTitle>{mapInfo.address}</AddressTitle>
         <CopyButton onClick={handleCopy}>
           <Icon icon={faCopy} size="lg" />
-          <ButtonCaption>복사하기</ButtonCaption>
+          <ButtonCaption>복사</ButtonCaption>
         </CopyButton>
       </AddressWrapper>
       <Divider />
@@ -50,6 +48,7 @@ const Location = () => {
         <Icon icon={faBuilding} color="#224f16" />
         <Caption textAlign="center">{mapInfo.location}</Caption>
       </AddressWrapper>
+      <br />
       <br />
       <Address />
     </LocationWrapper>
@@ -63,6 +62,7 @@ const LocationWrapper = styled.div`
   flex-direction: column;
   color: #333;
   background-color: rgba(250, 250, 250, 0.7);
+  padding: 60px 20px;
 `;
 
 const AddressWrapper = styled.div`
@@ -79,7 +79,7 @@ export const AddressTitle = styled.p`
   line-height: 1;
   margin: 0;
   color: #333;
-  white-space: pre-line;
+  white-space: nowrap;
   padding: 10px 0;
 `;
 
@@ -89,7 +89,7 @@ const Divider = styled.div`
   height: 1px;
   border-top: #7f7f7f dotted 1px;
   text-align: center;
-  width: 80%;
+  width: 90%;
 `;
 
 const CopyButton = styled.button`

@@ -1,11 +1,11 @@
-import styled from '@emotion/styled';
-import data from 'data.json';
-import NaverMapIcon from '@/assets/icons/naver.png';
 import KakaoMapIcon from '@/assets/icons/kakaomap.png';
+import NaverMapIcon from '@/assets/icons/naver.png';
 import TmapIcon from '@/assets/icons/tmap.svg';
-import Icon from '@/components/Icon';
-import { faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
 import MapImage from '@/assets/images/map.png';
+import Icon from '@/components/Icon';
+import styled from '@emotion/styled';
+import { faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
+import data from 'data.json';
 
 const MapButtons = () => {
   const { naverMap, kakaoMap, tmap } = data.mapInfo;
@@ -28,7 +28,7 @@ const MapButtons = () => {
       </MapButtonWrapper>
       <MapButtonWrapper>
         <MapButton onClick={() => window.open(MapImage)}>
-          <Icon icon={faMapLocationDot} size="3x" color="#888" />
+          <Icon icon={faMapLocationDot} color="#888" style={{ width: '42px', height: '42px' }} />
           <div>약도 이미지</div>
         </MapButton>
       </MapButtonWrapper>
@@ -39,7 +39,7 @@ const MapButtons = () => {
 export default MapButtons;
 
 const MapIconWrapper = styled.div`
-  margin: 1rem 1.5rem;
+  margin: 4px;
   display: flex;
   gap: 8px;
   justify-content: space-between;
@@ -65,4 +65,7 @@ const MapButton = styled.button`
   cursor: pointer;
 
   gap: 0.5rem;
+
+  font-size: 12px;
+  white-space: nowrap;
 `;

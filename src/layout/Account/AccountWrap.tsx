@@ -1,9 +1,8 @@
-import styled from '@emotion/styled';
 import Copy from '@/assets/icons/copy.svg?react';
 import kakaopay from '@/assets/icons/kakaopay.png?url';
 import toss from '@/assets/icons/toss.png?url';
-import { Flip, toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import styled from '@emotion/styled';
+import { Flip, toast } from 'react-toastify';
 
 interface IAccountProps {
   name: string;
@@ -22,7 +21,8 @@ const AccountWrap = ({
   tossAccount,
 }: IAccountProps) => {
   const handleCopy = () => {
-    navigator.clipboard.writeText(account).then(() =>
+    navigator.clipboard.writeText(account).then(() => {
+      toast.dismiss();
       toast.success(`${account} 계좌번호가 복사되었습니다.`, {
         position: 'top-right',
         autoClose: 2000,
@@ -34,13 +34,12 @@ const AccountWrap = ({
         progress: undefined,
         theme: 'light',
         transition: Flip,
-      }),
-    );
+      });
+    });
   };
 
   return (
     <Wrapper>
-      <ToastContainer />
       <Info>
         <Relation>{relation}</Relation>
         <Name>{name}</Name>
