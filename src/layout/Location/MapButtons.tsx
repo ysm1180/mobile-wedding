@@ -8,19 +8,12 @@ import { faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
 import MapImage from '@/assets/images/map.png';
 
 const MapButtons = () => {
-  const { naverMap, kakaoMap } = data.mapInfo;
+  const { naverMap, kakaoMap, tmap } = data.mapInfo;
 
   return (
     <MapIconWrapper>
       <MapButtonWrapper>
-        <MapButton
-          onClick={() =>
-            window.open(
-              `https://apis.openapi.sk.com/tmap/app/routes?appKey=${
-                import.meta.env.VITE_APP_TMAP_APP_KEY
-              }&name=더시그니처클래스&lon=126.969045&lat=37.256798`,
-            )
-          }>
+        <MapButton onClick={() => window.open(tmap)}>
           <img src={TmapIcon} width={42} />
           <div>TMAP</div>
         </MapButton>

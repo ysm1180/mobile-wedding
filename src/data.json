@@ -94,6 +94,7 @@
   "mapInfo": {
     "address": "경기 수원시 권선구 호매실로 46-16",
     "location": "더시그니처클래스 웨딩홀 (경기 종합노동복지회관 2층)",
+    "tmap": "tmap://?rGoName=더시그니처클래스&rGoX=126.969045&rGoY=37.256798",
     "naverMap": "https://map.naver.com/p/entry/place/1569718828",
     "kakaoMap": "https://place.map.kakao.com/1652133628",
     "lat": 37.2568485,
