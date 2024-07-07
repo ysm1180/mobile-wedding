@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import styled from '@emotion/styled';
-import PhotoGallery from './PhotoGallery.tsx';
-import { Heading1 } from '@/components/Text.tsx';
 import ExpandMore from '@/assets/icons/expand_more.svg?react';
+import { Heading1 } from '@/components/Text.tsx';
+import styled from '@emotion/styled';
+import { useState } from 'react';
+import PhotoGallery from './PhotoGallery.tsx';
 const GalleryWrap = () => {
   const [isMoreView, setIsMoreView] = useState(false);
 

@@ -1,9 +1,9 @@
-import styled from '@emotion/styled';
-import data from 'data.json';
-import JSConfetti from 'js-confetti';
 import Share from '@/assets/icons/share.svg?react';
 import Icon from '@/components/Icon';
+import styled from '@emotion/styled';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import data from 'data.json';
+import JSConfetti from 'js-confetti';
 
 const FloatingBar = ({ isVisible }: { isVisible: boolean }) => {
   const { emojis } = data;

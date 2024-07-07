@@ -1,9 +1,9 @@
+import { Paragraph } from '@/components/Text.tsx';
 import styled from '@emotion/styled';
 import data from 'data.json';
-import Host from './Host.tsx';
-import { Paragraph } from '@/components/Text.tsx';
 import Calendar from './Calendar.tsx';
 import Countdown from './Countdown.tsx';
+import Host from './Host.tsx';
 
 const Invitation = () => {
   const { greeting } = data;

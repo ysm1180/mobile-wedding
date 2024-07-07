@@ -1,6 +1,6 @@
-import { Gallery, Item } from 'react-photoswipe-gallery';
-import 'photoswipe/style.css';
 import images from '@/layout/Gallery/Images.ts';
+import 'photoswipe/style.css';
+import { Gallery, Item } from 'react-photoswipe-gallery';
 
 const PhotoGallery = () => {
   const smallItemStyles: React.CSSProperties = {

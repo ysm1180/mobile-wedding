@@ -1,8 +1,8 @@
+import Accordion from '@/components/Accordion.tsx';
+import { Heading1 } from '@/components/Text.tsx';
 import styled from '@emotion/styled';
 import data from 'data.json';
 import AccountWrap from './AccountWrap.tsx';
-import Accordion from '@/components/Accordion.tsx';
-import { Heading1 } from '@/components/Text.tsx';
 
 const Account = () => {
   const { hostInfo } = data;

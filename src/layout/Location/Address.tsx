@@ -1,14 +1,7 @@
-import styled from '@emotion/styled';
-import data from 'data.json';
-import { Caption, PointTitle } from '@/components/Text.tsx';
 import Icon from '@/components/Icon';
-import {
-  faCircle,
-  faCar,
-  faVanShuttle,
-  faBusSimple,
-  faTrain,
-} from '@fortawesome/free-solid-svg-icons';
+import { Caption, PointTitle } from '@/components/Text.tsx';
+import styled from '@emotion/styled';
+import { faBusSimple, faCar, faCircle, faVanShuttle } from '@fortawesome/free-solid-svg-icons';
 
 const Address = () => {
   return (

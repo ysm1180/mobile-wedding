@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
+import { useEffect, useState } from 'react';
 
 interface CountdownProps {
   weddingDate: string;

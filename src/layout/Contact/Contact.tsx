@@ -1,7 +1,7 @@
+import Icon from '@/components/Icon';
+import { Heading1 } from '@/components/Text';
 import styled from '@emotion/styled';
 import { faPhone, faSms } from '@fortawesome/free-solid-svg-icons';
-import { Heading1 } from '@/components/Text';
-import Icon from '@/components/Icon';
 
 const Container = styled.div`
   background-color: #fefaf7;

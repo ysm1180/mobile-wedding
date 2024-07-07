@@ -475,17 +475,6 @@ const CloseButton = styled.button`
   color: #888;
 `;
 
-const ModalContent = styled.div`
-  position: relative;
-  background-color: #fefaf7;
-  padding: 24px;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 400px;
-  z-index: 1001;
-  box-sizing: border-box;
-`;
-
 const Form = styled.form`
   display: flex;
   flex-direction: column;

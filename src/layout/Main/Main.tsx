@@ -1,11 +1,11 @@
-import styled from '@emotion/styled';
-import { css, keyframes } from '@emotion/react';
-import data from 'data.json';
-import mainImg from '@/assets/images/main.jpg';
 import connerIcon from '@/assets/icons/conner.png';
-import { useEffect, useState } from 'react';
+import mainImg from '@/assets/images/main.jpg';
 import Icon from '@/components/Icon';
+import { css, keyframes } from '@emotion/react';
+import styled from '@emotion/styled';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
+import data from 'data.json';
+import { useEffect, useState } from 'react';
 
 const Main = () => {
   const [openInterview, setOpenInterview] = useState(false);
