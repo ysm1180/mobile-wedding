@@ -9,7 +9,6 @@ export const Heading1 = styled.p`
   font-weight: 600;
 `;
 
-
 export const PointTitle = styled.p`
   font-family: GowunBatang-Bold, sans-serif;
   font-weight: 600;
@@ -38,13 +37,9 @@ export const Caption = styled.p<{ textAlign?: string }>`
   font-size: 14px;
   text-align: ${(props) => (props.textAlign ? props.textAlign : 'start')};
   white-space: pre-line;
+  word-break: keep-all;
 
   b {
     font-family: Pretendard-Bold, sans-serif;
   }
-`;
-
-export const ButtonCaption = styled.span`
-  font-family: 'RIDIBatang', sans-serif;
-  font-size: 12px;
 `;

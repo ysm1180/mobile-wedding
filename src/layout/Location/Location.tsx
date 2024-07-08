@@ -1,5 +1,5 @@
 import Icon from '@/components/Icon.tsx';
-import { ButtonCaption, Caption, Heading1 } from '@/components/Text.tsx';
+import { Heading1 } from '@/components/Text.tsx';
 import styled from '@emotion/styled';
 import { faBuilding, faCopy, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import data from 'data.json';
@@ -40,13 +40,12 @@ const Location = () => {
         <AddressTitle>{mapInfo.address}</AddressTitle>
         <CopyButton onClick={handleCopy}>
           <Icon icon={faCopy} size="lg" />
-          <ButtonCaption>복사</ButtonCaption>
         </CopyButton>
       </AddressWrapper>
       <Divider />
       <AddressWrapper>
         <Icon icon={faBuilding} color="#224f16" />
-        <Caption textAlign="center">{mapInfo.location}</Caption>
+        <AddressCaption>{mapInfo.location}</AddressCaption>
       </AddressWrapper>
       <br />
       <br />
@@ -102,4 +101,15 @@ const CopyButton = styled.button`
   background-color: rgba(250, 250, 250, 0.7);
 
   display: flex;
+
+  text-decoration: none;
+  outline: none;
+`;
+
+const AddressCaption = styled.p`
+  text-align: center;
+  font-family: Pretendard-Regular, sans-serif;
+  margin: 0;
+  font-size: 13px;
+  white-space: pre-line;
 `;

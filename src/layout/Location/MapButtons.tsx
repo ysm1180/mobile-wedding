@@ -41,15 +41,15 @@ export default MapButtons;
 const MapIconWrapper = styled.div`
   margin: 4px;
   display: flex;
-  gap: 8px;
-  justify-content: space-between;
+  gap: 4px;
+  justify-content: center;
 `;
 
 const MapButtonWrapper = styled.div`
-  margin: 1rem;
+  margin: 8px 4px;
   display: flex;
   gap: 8px;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 const MapButton = styled.button`
@@ -63,9 +63,10 @@ const MapButton = styled.button`
 
   background-color: rgba(250, 250, 250, 0.7);
   cursor: pointer;
-
-  gap: 0.5rem;
+  gap: 8px;
 
   font-size: 12px;
   white-space: nowrap;
+
+  text-decoration: none;
 `;

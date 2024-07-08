@@ -112,8 +112,7 @@ const Guestbook: React.FC = () => {
           </FlowerIcon>
           <EmptyStateTitle>첫 축하 메시지를 남겨주세요!</EmptyStateTitle>
           <EmptyStateMessage>
-            신랑, 신부에게 따뜻한 축하의 말을 전하고
-            <br /> 이 특별한 순간을 함께 기념해요.
+            신랑, 신부에게 따뜻한 축하의 말을 전하고 이 특별한 순간을 함께 기념해요.
           </EmptyStateMessage>
           <EmptyStateButton onClick={() => setIsWriteModalOpen(true)}>
             <PenLine size={16} />
@@ -303,7 +302,7 @@ const EmptyState = styled.div`
 
 const FlowerIcon = styled.div`
   color: #7ea387;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   animation: float 3s ease-in-out infinite;
 
   @keyframes float {
@@ -320,17 +319,19 @@ const FlowerIcon = styled.div`
 `;
 
 const EmptyStateTitle = styled.h3`
-  font-size: 20px;
+  font-size: 16px;
   color: #595d3b;
   margin-bottom: 12px;
   font-family: RIDIBatang, sans-serif;
 `;
 
 const EmptyStateMessage = styled.p`
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.6;
   margin-bottom: 24px;
   color: #6c6c6c;
+  white-space: pre-line;
+  word-break: keep-all;
 `;
 
 const EmptyStateButton = styled.button`
@@ -462,7 +463,7 @@ const ModalHeader = styled.div`
 `;
 
 const ModalTitle = styled.h2`
-  font-size: 20px;
+  font-size: 16px;
   color: #333;
   margin: 0;
   font-weight: bold;
@@ -478,7 +479,7 @@ const CloseButton = styled.button`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   width: 100%;
 `;
 
@@ -488,7 +489,7 @@ const Input = styled.input`
   border: 1px solid #ddd;
   border-radius: 4px;
   font-family: GowunBatang-Regular, sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   box-sizing: border-box;
 `;
 
@@ -503,7 +504,7 @@ const TextArea = styled.textarea`
   border: 1px solid #ddd;
   border-radius: 4px;
   font-family: GowunBatang-Regular, sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   resize: vertical;
   min-height: 100px;
   box-sizing: border-box;
@@ -519,14 +520,13 @@ const CharCount = styled.div<CharCountProps>`
   bottom: 10px;
   font-size: 12px;
   color: ${(props) => (props.isNearLimit ? '#e74c3c' : '#888')};
-  background-color: rgba(254, 250, 247, 0.8);
   padding: 2px 4px;
   border-radius: 4px;
 `;
 
 const SubmitButton = styled.button`
   padding: 10px;
-  background-color: #595d3b;
+  background-color: #7ea387;
   color: #fefaf7;
   border: none;
   border-radius: 4px;

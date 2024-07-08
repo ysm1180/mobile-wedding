@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import data from 'data.json';
 import { useEffect, useState } from 'react';
+import WeddingGame from './WeddingGame';
 
 const Main = () => {
   const [openInterview, setOpenInterview] = useState(false);
@@ -19,14 +20,15 @@ const Main = () => {
       leaf.style.animationDuration = `${Math.random() * 5 + 10}s`;
       leaf.style.width = `${Math.random() * 5 + 10}px`;
       leaf.style.height = leaf.style.width;
+      leaf.style.transform = `rotate(${Math.random() * 360}deg)`;
       document.getElementById('leaf-container')?.appendChild(leaf);
 
       setTimeout(() => {
         leaf.remove();
-      }, 10000);
+      }, 15000);
     };
 
-    const interval = setInterval(createLeaf, 1000);
+    const interval = setInterval(createLeaf, 800);
 
     return () => clearInterval(interval);
   }, []);
@@ -61,6 +63,7 @@ const Main = () => {
           <CloseButton onClick={() => setOpenInterview(false)}>
             <Icon icon={faClose} size="2x" />
           </CloseButton>
+          <WeddingGame />
         </MainPopup>
       )}
     </MainBackground>
@@ -71,11 +74,17 @@ export default Main;
 
 const falling = keyframes`
   0% {
-    transform: translateY(-5%) rotate(0deg);
+    transform: translateY(-5%) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
     opacity: 1;
   }
   100% {
-    transform: translateY(100vh) rotate(720deg);
+    transform: translateY(100vh) rotate(720deg) translateX(${Math.random() * 100 - 50}px);
     opacity: 0;
   }
 `;
@@ -97,7 +106,7 @@ const leafStyles = css`
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 C20 20 20 80 50 100 C80 80 80 20 50 0' fill='%2390EE90' /%3E%3C/svg%3E");
   background-size: contain;
   opacity: 0.7;
-  animation: ${falling} 10s infinite linear;
+  animation: ${falling} 15s infinite cubic-bezier(0.37, 0, 0.63, 1);
 `;
 
 const InterviewContainer = styled.div`
@@ -162,7 +171,6 @@ const InterviewEmphasis = styled.span`
 const MainBackground = styled.div`
   display: flex;
   flex-direction: column;
-
   background:
     linear-gradient(rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.5)),
     url(${mainImg}) no-repeat center center;
@@ -195,7 +203,8 @@ const MainBackground = styled.div`
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  color: #222;
+  color: #333;
+  margin-bottom: 30px;
 `;
 
 const OurName = styled.div`
