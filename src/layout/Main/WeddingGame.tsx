@@ -71,7 +71,7 @@ const WeddingGame: React.FC = () => {
     y: 260,
     width: 48,
     height: 72,
-    speed: 2,
+    speed: 3,
     jumpForce: 4,
     gravity: 0.1,
     velocity: 0,
@@ -89,7 +89,7 @@ const WeddingGame: React.FC = () => {
     const randomSvg = OBSTACLES[Math.floor(Math.random() * OBSTACLES.length)];
     const obstacle: GameObject = {
       x: startX,
-      y: Math.random() < 0.5 ? 280 : 250,
+      y: Math.random() < 0.5 ? 290 : 260,
       width: 30,
       height: 30,
       image: new Image(),
