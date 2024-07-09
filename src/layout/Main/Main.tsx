@@ -33,13 +33,25 @@ const Main = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (openInterview) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'visible';
+    }
+
+    return () => {
+      document.body.style.overflow = 'visible';
+    };
+  }, [openInterview]);
+
   return (
     <MainBackground>
       <LeafContainer id="leaf-container" />
       <MainWrapper>
         <InterviewContainer onClick={() => setOpenInterview(true)}>
           <InterviewText>
-            💕 두 사람의 <InterviewEmphasis>웨딩 이야기</InterviewEmphasis>를 확인해보세요!
+            💕 신랑의 <GameHighlight>사랑의 여정</GameHighlight>에 도전해보세요!
           </InterviewText>
         </InterviewContainer>
         <OurName>
@@ -158,7 +170,7 @@ const InterviewText = styled.p`
   }
 `;
 
-const InterviewEmphasis = styled.span`
+const GameHighlight = styled.span`
   font-size: 14px;
   font-weight: bold;
   color: #1f4913;
@@ -246,7 +258,6 @@ const MainPopup = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-
   background-color: rgba(250, 249, 243, 1);
   z-index: 20;
 `;

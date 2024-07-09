@@ -3,38 +3,55 @@ import styled from '@emotion/styled';
 import Groom from '@/assets/minigame/groom.png';
 import Bride from '@/assets/minigame/bride.png';
 import Background from '@/assets/minigame/background.jpg';
+import Background1 from '@/assets/minigame/background1.jpg';
+import Background2 from '@/assets/minigame/background2.jpg';
+import Background3 from '@/assets/minigame/background3.jpg';
+import Background4 from '@/assets/minigame/background4.jpg';
 import Cute from '@/assets/minigame/cute.png';
+import Cake from '@/assets/minigame/cake.png';
+import Glass from '@/assets/minigame/glass.png';
+import Present from '@/assets/minigame/present.png';
+import Ring from '@/assets/minigame/ring.png';
 
 const ASSETS = {
-  background: Background,
+  backgrounds: [Background1, Background2, Background3, Background4, Background],
   groom: Groom,
   bride: Bride,
   cute: Cute,
 };
 
 const OBSTACLES = [
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-    <rect x="6" y="22" width="20" height="10" fill="#FFFFFF" />
-    <rect x="8" y="12" width="16" height="10" fill="#FFF0F5" />
-    <rect x="10" y="2" width="12" height="10" fill="#FFB6C1" />
-    <circle cx="16" cy="2" r="2" fill="#FF69B4" />
-  </svg>`,
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-    <circle cx="16" cy="16" r="12" fill="none" stroke="#FFD700" stroke-width="4" />
-    <circle cx="16" cy="16" r="8" fill="none" stroke="#FFA500" stroke-width="2" />
-  </svg>`,
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-    <path d="M16,2 Q22,8 22,16 Q22,24 16,30 Q10,24 10,16 Q10,8 16,2" fill="#FF69B4" />
-    <path d="M13,5 Q16,8 16,13 Q16,18 13,21 Q10,18 10,13 Q10,8 13,5" fill="#FFC0CB" />
-    <path d="M19,5 Q22,8 22,13 Q22,18 19,21 Q16,18 16,13 Q16,8 19,5" fill="#FFC0CB" />
-    <rect x="15" y="21" width="2" height="10" fill="#008000" />
-  </svg>`,
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-    <rect x="4" y="8" width="24" height="20" fill="#FF4500" />
-    <rect x="4" y="16" width="24" height="4" fill="#FFD700" />
-    <rect x="14" y="8" width="4" height="20" fill="#FFD700" />
-    <rect x="8" y="4" width="16" height="4" fill="#FF69B4" />
-  </svg>`,
+  {
+    type: 'static',
+    src: Cake,
+    width: 30,
+    height: 30,
+  },
+  {
+    type: 'moving',
+    src: Cake,
+    width: 30,
+    height: 30,
+    speed: 2,
+  },
+  {
+    type: 'static',
+    src: Ring,
+    width: 30,
+    height: 30,
+  },
+  {
+    type: 'static',
+    src: Glass,
+    width: 35,
+    height: 35,
+  },
+  {
+    type: 'static',
+    src: Present,
+    width: 35,
+    height: 35,
+  },
 ];
 
 interface GameObject {
@@ -43,6 +60,16 @@ interface GameObject {
   width: number;
   height: number;
   image: HTMLImageElement;
+}
+
+interface Obstacle extends GameObject {
+  type: string;
+  src: string;
+  movePattern?: string;
+  speed?: number;
+  rotationSpeed?: number;
+  rotation?: number;
+  direction?: number;
 }
 
 interface Groom extends GameObject {
@@ -59,19 +86,32 @@ type GameState = 'ready' | 'playing' | 'won' | 'lost';
 const totalDistance = 6000; // 총 거리
 const yearsToProgress = 2024 - 2015; // 진행할 연도 수
 
+const backgroundImages: HTMLImageElement[] = [];
+const cuteImage = new Image();
+cuteImage.src = Cute;
+
+for (const background of ASSETS.backgrounds) {
+  const image = new Image();
+  image.src = background;
+  backgroundImages.push(image);
+}
+
 const WeddingGame: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [gameState, setGameState] = useState<GameState>('ready');
   const [score, setScore] = useState(0);
   const [progress, setProgress] = useState(0);
-  const obstaclesRef = useRef<GameObject[]>([]);
+  const obstaclesRef = useRef<Obstacle[]>([]);
+  const backgroundImageRef = useRef<HTMLImageElement>(backgroundImages[0]);
+  const [backgroundIndex, setBackgroundIndex] = useState(0);
+  const [showSuccessInfo, setShowSuccessInfo] = useState(false);
 
   const groom: Groom = {
     x: 20,
-    y: 260,
+    y: 200,
     width: 48,
     height: 72,
-    speed: 3,
+    speed: 2,
     jumpForce: 4,
     gravity: 0.1,
     velocity: 0,
@@ -80,34 +120,39 @@ const WeddingGame: React.FC = () => {
     image: new Image(),
   };
 
-  const svgToDataURL = (svgString: string): string => {
-    return `data:image/svg+xml;base64,${btoa(svgString)}`;
-  };
-
-  const bride: GameObject = { x: totalDistance, y: 260, width: 48, height: 72, image: new Image() };
-  const generateObstacle = useCallback((startX: number): GameObject => {
-    const randomSvg = OBSTACLES[Math.floor(Math.random() * OBSTACLES.length)];
-    const obstacle: GameObject = {
+  const bride: GameObject = { x: totalDistance, y: 200, width: 48, height: 72, image: new Image() };
+  const generateObstacle = useCallback((startX: number): Obstacle => {
+    const obstacleTemplate = OBSTACLES[Math.floor(Math.random() * OBSTACLES.length)];
+    const obstacle: Obstacle = {
+      ...obstacleTemplate,
       x: startX,
-      y: Math.random() < 0.5 ? 290 : 260,
-      width: 30,
-      height: 30,
+      y: obstacleTemplate.type === 'moving' ? 200 : Math.random() < 0.5 ? 200 : 230,
       image: new Image(),
+      direction: 1,
+      rotation: 0,
     };
-    obstacle.image.src = svgToDataURL(randomSvg);
+    obstacle.image.src = obstacle.src;
     return obstacle;
   }, []);
 
+  groom.image.src = ASSETS.groom;
+  bride.image.src = ASSETS.bride;
+
   useEffect(() => {
     // 초기 장애물 생성
-    obstaclesRef.current = Array(12)
+    obstaclesRef.current = Array(13)
       .fill(null)
       .map((_, index) => generateObstacle(500 + index * 400));
   }, [generateObstacle]);
 
-  const backgroundImage = new Image();
-  const cuteImage = new Image();
-  cuteImage.src = Cute;
+  useEffect(() => {
+    const newIndex = Math.min(Math.floor(progress / 25), 4);
+    setBackgroundIndex(newIndex);
+  }, [progress]);
+
+  useEffect(() => {
+    backgroundImageRef.current = backgroundImages[backgroundIndex];
+  }, [backgroundIndex]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -117,11 +162,6 @@ const WeddingGame: React.FC = () => {
     if (!ctx) return;
 
     let animationFrameId: number;
-
-    // Load assets
-    backgroundImage.src = ASSETS.background;
-    groom.image.src = ASSETS.groom;
-    bride.image.src = ASSETS.bride;
 
     const handleJump = () => {
       if (!groom.jumping) {
@@ -139,7 +179,7 @@ const WeddingGame: React.FC = () => {
         setGameState('playing');
       } else if (gameState === 'playing') {
         handleJump();
-      } else {
+      } else if (gameState === 'lost') {
         setGameState('ready');
         resetGame();
       }
@@ -149,31 +189,69 @@ const WeddingGame: React.FC = () => {
 
     const resetGame = () => {
       groom.x = 20;
-      groom.y = 260;
+      groom.y = 200;
       groom.velocity = 0;
       groom.jumping = false;
       groom.doubleJumping = false;
       setScore(0);
       setProgress(0);
-      obstaclesRef.current = Array(12)
+      obstaclesRef.current = Array(14)
         .fill(null)
         .map((_, index) => generateObstacle(500 + index * 400));
-      bride.x = 3000;
+      bride.x = totalDistance;
+    };
+
+    const updateObstacle = (obstacle: Obstacle) => {
+      obstacle.x -= groom.speed;
+
+      if (obstacle.type === 'moving' && obstacle.movePattern === 'vertical') {
+        obstacle.y += obstacle.speed! * obstacle.direction!;
+        if (obstacle.y > 200 || obstacle.y < 290) {
+          obstacle.direction! *= -1;
+        }
+      } else if (obstacle.type === 'rotating') {
+        obstacle.rotation! += obstacle.rotationSpeed!;
+      }
+    };
+
+    const drawObstacle = (ctx: CanvasRenderingContext2D, obstacle: Obstacle) => {
+      ctx.save();
+      ctx.translate(obstacle.x + obstacle.width / 2, obstacle.y + obstacle.height / 2);
+      if (obstacle.type === 'rotating') {
+        ctx.rotate(obstacle.rotation!);
+      }
+      ctx.drawImage(
+        obstacle.image,
+        -obstacle.width / 2,
+        -obstacle.height / 2,
+        obstacle.width,
+        obstacle.height,
+      );
+      ctx.restore();
+    };
+
+    const checkCollision = (groom: Groom, obstacle: Obstacle) => {
+      return (
+        groom.x < obstacle.x + obstacle.width - 20 &&
+        groom.x + groom.width > obstacle.x + 20 &&
+        groom.y < obstacle.y + obstacle.height &&
+        groom.y + groom.height > obstacle.y
+      );
     };
 
     const gameLoop = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // 배경 그리기
-      ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(backgroundImageRef.current!, 0, 0, canvas.width, canvas.height);
 
       if (gameState === 'playing') {
         // 신랑 이동 및 그리기
         groom.velocity += groom.gravity;
         groom.y += groom.velocity;
 
-        if (groom.y > 260) {
-          groom.y = 260;
+        if (groom.y > 200) {
+          groom.y = 200;
           groom.jumping = false;
           groom.doubleJumping = false;
           groom.velocity = 0;
@@ -183,16 +261,10 @@ const WeddingGame: React.FC = () => {
 
         // 장애물 이동 및 그리기
         obstaclesRef.current = obstaclesRef.current.map((obstacle) => {
-          obstacle.x -= groom.speed;
-          ctx.drawImage(obstacle.image, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+          updateObstacle(obstacle);
+          drawObstacle(ctx, obstacle);
 
-          // 충돌 체크
-          if (
-            groom.x < obstacle.x + obstacle.width - 20 &&
-            groom.x + groom.width > obstacle.x + 20 &&
-            groom.y < obstacle.y + obstacle.height &&
-            groom.y + groom.height > obstacle.y
-          ) {
+          if (checkCollision(groom, obstacle)) {
             setGameState('lost');
           }
 
@@ -215,12 +287,12 @@ const WeddingGame: React.FC = () => {
         }
       } else if (gameState === 'ready') {
         ctx.font = '16px GowunBatang-Bold';
-        ctx.fillStyle = '#333';
-        ctx.fillText('2015년부터의 여정 시작', canvas.width / 2 - 80, canvas.height / 2 - 20);
+        ctx.fillStyle = '#111';
+        ctx.fillText('2015년부터의 여정 시작', canvas.width / 2 - 80, canvas.height / 2 - 70);
         ctx.fillText(
           '한 번 터치 : 점프, 두 번 터치 : 더블 점프',
           canvas.width / 2 - 130,
-          canvas.height / 2 + 10,
+          canvas.height / 2 - 40,
         );
       } else if (gameState === 'won') {
         ctx.drawImage(cuteImage, groom.x, groom.y - 10, groom.width + 10, groom.height + 10);
@@ -228,17 +300,18 @@ const WeddingGame: React.FC = () => {
         ctx.font = '16px GowunBatang-Bold';
         ctx.fillStyle = 'green';
         ctx.fillText(
-          '축하합니다! 9년의 사랑 끝에 결혼!',
+          '축하합니다! 신부를 무사히 만났습니다!',
           canvas.width / 2 - 120,
-          canvas.height / 2 - 20,
+          canvas.height / 2 - 50,
         );
+        setShowSuccessInfo(true);
       } else if (gameState === 'lost') {
         ctx.font = '16px GowunBatang-Bold';
         ctx.fillStyle = 'red';
         ctx.fillText(
           '아쉽네요! 다시 도전해보세요!',
           canvas.width / 2 - 100,
-          canvas.height / 2 - 20,
+          canvas.height / 2 - 70,
         );
       }
 
@@ -261,38 +334,92 @@ const WeddingGame: React.FC = () => {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let animationFrameId2: number;
 
     const drawProgress = () => {
       ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
       ctx.fillRect(10, 10, 300, 20);
-      ctx.fillStyle = 'rgba(0, 255, 0, 0.7)';
+      ctx.fillStyle = 'rgba(0, 255, 145, 0.7)';
       ctx.fillRect(10, 10, (300 * progress) / 100, 20);
+
+      const currentYear = Math.min(2024, 2015 + score);
+      ctx.font = '13px GowunBatang-Bold';
+      ctx.fillStyle = 'black';
+      ctx.fillText(`${currentYear}년`, 15, 26);
 
       animationFrameId = window.requestAnimationFrame(drawProgress);
     };
 
-    const drawYear = () => {
-      const currentYear = Math.min(2024, 2015 + score);
-      ctx.font = '14px GowunBatang-Bold';
-      ctx.fillStyle = 'black';
-      ctx.fillText(`${currentYear}년`, 15, 26);
-
-      animationFrameId2 = window.requestAnimationFrame(drawYear);
-    };
-
     drawProgress();
-    drawYear();
 
     return () => {
       window.cancelAnimationFrame(animationFrameId);
-      window.cancelAnimationFrame(animationFrameId2);
     };
   }, [progress, score]);
 
   return (
     <GameWrapper>
-      <GameCanvas ref={canvasRef} width={320} height={400} />
+      <GameCanvas ref={canvasRef} width={320} height={280} />
+      <MessageSection>
+        {showSuccessInfo && (
+          <ThankYouMessage>
+            <b>여정에 성공하신 것을 축하합니다!</b>
+            <br />
+            저희의 사랑의 여정에 함께해 주셔서 감사합니다.
+          </ThankYouMessage>
+        )}
+        {showSuccessInfo ? (
+          <QASection>
+            <QATitle>결혼 준비에 있어 궁금한 점을 알려드릴게요!</QATitle>
+            <QAItem>
+              <Question>Q: 첫 만남은 언제인가요?</Question>
+              <Answer>A: 2015년 4월부터 만났어요. 🥰</Answer>
+            </QAItem>
+            <QAItem>
+              <Question>Q: 결혼을 앞둔 소감은 어떤가요?</Question>
+              <Answer>
+                <AnswerPerson>
+                  <AnswerPersonTitle>신랑</AnswerPersonTitle>
+                  <AnswerPersonResponse>
+                    9년이라는 긴 시간 동안 함께 걸어왔지만, 이제 평생을 약속하는 결혼을 앞두니
+                    설렘과 책임감이 교차합니다. 그동안 우리의 사랑을 지켜봐 주신 모든 분들께
+                    감사드립니다. 앞으로도 서로를 아끼며 지내겠습니다.
+                  </AnswerPersonResponse>
+                </AnswerPerson>
+              </Answer>
+              <Answer>
+                <AnswerPerson>
+                  <AnswerPersonTitle>신부</AnswerPersonTitle>
+                  <AnswerPersonResponse>
+                    오랜 시간 함께했지만 여전히 새롭고 귀여운 매력으로 가득한 성민 오빠와 평생을
+                    함께하게 되어 너무나 설렙니다! ☺️ 지금까지 그래왔듯이 앞으로도 서로 아끼고
+                    존중하며 행복하게 살겠습니다. 축하해 주신 모든 분들께 진심으로 감사드립니다 :-)
+                  </AnswerPersonResponse>
+                </AnswerPerson>
+              </Answer>
+            </QAItem>
+            <QAItem>
+              <Question>Q: 신혼 여행지는 어디인가요?</Question>
+              <Answer>A: 모히또 가서 몰디브 한 잔하고 오겠습니다! 🏖️</Answer>
+            </QAItem>
+          </QASection>
+        ) : (
+          <QASection>
+            <QATitle>Q&A</QATitle>
+            <QAItem>
+              <Question>Q: 게임은 어떻게 하나요?</Question>
+              <Answer>
+                A: 화면을 한 번 터치하면 점프, 두 번 터치하면 더블 점프를 할 수 있어요.
+              </Answer>
+            </QAItem>
+            <QAItem>
+              <Question>Q: 게임의 목표는 무엇인가요?</Question>
+              <Answer>
+                A: 2015년부터 2024년까지의 사랑의 여정을 장애물을 피해 완주하는 것입니다.
+              </Answer>
+            </QAItem>
+          </QASection>
+        )}
+      </MessageSection>
     </GameWrapper>
   );
 };
@@ -311,4 +438,76 @@ const GameWrapper = styled.div`
 const GameCanvas = styled.canvas`
   border: 2px solid #7ea387;
   border-radius: 10px;
+
+  margin-top: 50px;
+`;
+
+const MessageSection = styled.div`
+  margin: 10px 0;
+  padding: 0 10px;
+  text-align: center;
+
+  overflow: scroll;
+`;
+
+const ThankYouMessage = styled.p`
+  font-family: 'GowunBatang-Regular', sans-serif;
+  font-size: 13px;
+  color: #4a4a4a;
+  margin-bottom: 10px;
+  line-height: 2;
+
+  b {
+    font-family: 'GowunBatang-Bold', sans-serif;
+    font-size: 15px;
+  }
+`;
+
+const QASection = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 20px;
+`;
+
+const QATitle = styled.h3`
+  font-family: 'RIDIBatang', sans-serif;
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 14px;
+`;
+
+const QAItem = styled.div`
+  margin-bottom: 12px;
+`;
+
+const Question = styled.div`
+  font-family: 'GowunBatang-Bold', sans-serif;
+  font-size: 13px;
+  color: #4a4a4a;
+  margin-bottom: 4px;
+`;
+
+const Answer = styled.div`
+  font-family: 'GowunBatang-Regular', sans-serif;
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 4px;
+`;
+
+const AnswerPerson = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+`;
+
+const AnswerPersonTitle = styled.div`
+  font-family: 'GowunBatang-Bold', sans-serif;
+  white-space: nowrap;
+`;
+
+const AnswerPersonResponse = styled.div`
+  white-space: pre-line;
+  word-break: keep-all;
+  text-align: left;
 `;

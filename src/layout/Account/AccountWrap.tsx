@@ -50,6 +50,7 @@ const AccountWrap = ({
         </AccountInfo>
         <CopyButton onClick={handleCopy}>
           <Copy fill="#dfdfdf" />
+          복사
         </CopyButton>
       </Details>
       <AccountLinks>
@@ -120,6 +121,11 @@ const CopyButton = styled.button`
   outline: none;
   box-shadow: none;
   background: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  font-family: GowunBatang-Regular, sans-serif;
 `;
 
 const AccountLinks = styled.div`
