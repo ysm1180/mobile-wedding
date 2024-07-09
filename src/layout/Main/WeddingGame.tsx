@@ -28,13 +28,6 @@ const OBSTACLES = [
     height: 30,
   },
   {
-    type: 'moving',
-    src: Cake,
-    width: 30,
-    height: 30,
-    speed: 2,
-  },
-  {
     type: 'static',
     src: Ring,
     width: 30,
@@ -111,7 +104,7 @@ const WeddingGame: React.FC = () => {
     y: 200,
     width: 48,
     height: 72,
-    speed: 2,
+    speed: 3,
     jumpForce: 4,
     gravity: 0.1,
     velocity: 0,
