@@ -51,7 +51,7 @@ const Main = () => {
       <MainWrapper>
         <InterviewContainer onClick={() => setOpenInterview(true)}>
           <InterviewText>
-            💕 신랑의 <GameHighlight>사랑의 여정</GameHighlight>에 도전해보세요!
+            💕 신랑의 <GameHighlight>사랑의 여정</GameHighlight>에 도전해보세요! 터치
           </InterviewText>
         </InterviewContainer>
         <OurName>
