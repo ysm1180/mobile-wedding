@@ -104,7 +104,7 @@ const WeddingGame: React.FC = () => {
     y: 200,
     width: 48,
     height: 72,
-    speed: 3,
+    speed: 2,
     jumpForce: 4,
     gravity: 0.1,
     velocity: 0,
